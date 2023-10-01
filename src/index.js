@@ -9,13 +9,14 @@ const {auth} = require('./middlewares/authMiddleware')
 const routes = require('./routes');
 const { errorHandler } = require('./middlewares/errorHandlerMiddleware');
 
+const {PORT} = require('./config/config');
+
 const app = express();
 
 //TODO: change DB name
 mongoose.connect('mongodb://127.0.0.1:27017/petstagram1')
     .then(() => console.log('DB connected!'))
     .catch((err) => console.log('DB Error: ', err.message));
-
 
 app.engine('hbs', handlebars.engine({
     extname: 'hbs'
@@ -37,4 +38,4 @@ app.use(errorHandler);
 
 
 
-app.listen(5000, console.log('Server is listening on port 5000...'));
+app.listen(PORT, console.log(`Server is listening on port ${PORT}...`));
